@@ -51,6 +51,11 @@ def big_countries(world: pd.DataFrame) -> pd.DataFrame:
     result = result[['name', 'population', 'area']]
     return result
 
+def big_countries2(world: pd.DataFrame) -> pd.DataFrame:
+    return world.loc[(world['area'] >= 3000000) | (world['population'] >= 25000000), ['name', 'population', 'area']]
+
+
+
 data = {
     "name": ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola"],
     "continent": ["Asia", "Europe", "Africa", "Europe", "Africa"],
@@ -59,4 +64,4 @@ data = {
     "gdp": [20343000000, 12960000000, 188681000000, 3712000000, 100990000000]
 }
 
-print(big_countries(pd.DataFrame(data)))
+print(big_countries2(pd.DataFrame(data)))
