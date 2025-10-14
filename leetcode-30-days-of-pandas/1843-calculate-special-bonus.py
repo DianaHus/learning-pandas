@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 '''
         Table: Employees
 
@@ -60,6 +61,10 @@ def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
     ] = employees['salary']
     return employees[['employee_id', 'bonus']].sort_values(by='employee_id')
 
+def calculate_special_bonus2(employees: pd.DataFrame) -> pd.DataFrame:
+    cond = (~employees['name'].str.startswith('M')) & (employees['employee_id'] % 2 == 1)
+    employees['bonus'] = np.where(cond, employees['salary'], 0)
+    return employees[['employee_id', 'bonus']].sort_values(by='employee_id')
 
 data = {
     'employee_id': [2, 3, 7, 8, 9],
@@ -68,4 +73,4 @@ data = {
 }
 employees = pd.DataFrame(data)
 
-print(calculate_special_bonus(employees))
+print(calculate_special_bonus2(employees))
